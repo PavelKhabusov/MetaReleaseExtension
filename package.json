@@ -1,0 +1,235 @@
+{
+  "name": "meta-release-extension",
+  "displayName": "Meta Quest Release Manager",
+  "description": "Manage builds and release channels for Meta Quest Store",
+  "version": "0.0.1",
+  "publisher": "PavelKhabusov",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PavelKhabusov/meta-release-extension"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "metaQuest",
+          "title": "Meta Quest",
+          "icon": "resources/icons/sidebar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "metaQuest": [
+        {
+          "id": "metaQuestApps",
+          "name": "Apps & Channels"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "metaQuestApps",
+        "contents": "No Meta Quest apps configured.\n[Add App](command:metaQuest.addApp)\n\nConfigure your App ID and App Secret to get started.",
+        "when": "metaQuest.noApps"
+      }
+    ],
+    "commands": [
+      {
+        "command": "metaQuest.addApp",
+        "title": "Add App",
+        "category": "Meta Quest",
+        "icon": "$(add)"
+      },
+      {
+        "command": "metaQuest.removeApp",
+        "title": "Remove App",
+        "category": "Meta Quest"
+      },
+      {
+        "command": "metaQuest.refresh",
+        "title": "Refresh",
+        "category": "Meta Quest",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "metaQuest.uploadBuild",
+        "title": "Upload Build",
+        "category": "Meta Quest",
+        "icon": "$(cloud-upload)"
+      },
+      {
+        "command": "metaQuest.promoteBuild",
+        "title": "Promote Build",
+        "category": "Meta Quest",
+        "icon": "$(arrow-right)"
+      },
+      {
+        "command": "metaQuest.setOvrPath",
+        "title": "Set ovr-platform-util Path",
+        "category": "Meta Quest"
+      },
+      {
+        "command": "metaQuest.login",
+        "title": "Sign In to Meta Developer",
+        "category": "Meta Quest",
+        "icon": "$(sign-in)"
+      },
+      {
+        "command": "metaQuest.logout",
+        "title": "Sign Out from Meta Developer",
+        "category": "Meta Quest",
+        "icon": "$(sign-out)"
+      },
+      {
+        "command": "metaQuest.openAppPanel",
+        "title": "Open App Details",
+        "category": "Meta Quest",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "metaQuest.downloadBuild",
+        "title": "Download Build",
+        "category": "Meta Quest",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "metaQuest.showUploadQueue",
+        "title": "Show Upload Queue",
+        "category": "Meta Quest"
+      },
+      {
+        "command": "metaQuest.initWorkspaceConfig",
+        "title": "Init .meta-quest.json",
+        "category": "Meta Quest"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "metaQuest.addApp",
+          "when": "view == metaQuestApps",
+          "group": "navigation"
+        },
+        {
+          "command": "metaQuest.refresh",
+          "when": "view == metaQuestApps",
+          "group": "navigation"
+        },
+        {
+          "command": "metaQuest.login",
+          "when": "view == metaQuestApps",
+          "group": "2_auth"
+        },
+        {
+          "command": "metaQuest.logout",
+          "when": "view == metaQuestApps",
+          "group": "2_auth"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "metaQuest.uploadBuild",
+          "when": "view == metaQuestApps && viewItem == channel",
+          "group": "inline"
+        },
+        {
+          "command": "metaQuest.promoteBuild",
+          "when": "view == metaQuestApps && viewItem == channel"
+        },
+        {
+          "command": "metaQuest.downloadBuild",
+          "when": "view == metaQuestApps && viewItem == channel"
+        },
+        {
+          "command": "metaQuest.openAppPanel",
+          "when": "view == metaQuestApps && viewItem == app",
+          "group": "inline"
+        },
+        {
+          "command": "metaQuest.removeApp",
+          "when": "view == metaQuestApps && viewItem == app"
+        }
+      ]
+    },
+    "taskDefinitions": [
+      {
+        "type": "meta-quest",
+        "required": ["action", "appId"],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": ["upload", "promote", "download"],
+            "description": "Action to perform"
+          },
+          "appId": {
+            "type": "string",
+            "description": "Meta Quest App ID"
+          },
+          "channel": {
+            "type": "string",
+            "description": "Release channel"
+          },
+          "apkPath": {
+            "type": "string",
+            "description": "Path to APK file"
+          },
+          "buildId": {
+            "type": "string",
+            "description": "Build ID"
+          }
+        }
+      }
+    ],
+    "configuration": {
+      "title": "Meta Quest Release Manager",
+      "properties": {
+        "metaQuest.ovrPlatformUtilPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to ovr-platform-util binary. Leave empty for auto-detection."
+        },
+        "metaQuest.apps": {
+          "type": "array",
+          "default": [],
+          "description": "List of configured Meta Quest apps.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "appId": {
+                "type": "string",
+                "description": "Meta Quest App ID"
+              },
+              "appName": {
+                "type": "string",
+                "description": "Display name for the app"
+              }
+            },
+            "required": ["appId"]
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "install-local": "vsce package && code --install-extension meta-release-extension-0.0.1.vsix"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
+  }
+}
