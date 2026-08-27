@@ -1,11 +1,23 @@
+<div align="center">
+
+<img src="assets/icon.svg" width="96" alt="Meta Quest Release Manager">
+
 # Meta Quest Release Manager
 
-![VS Code](https://img.shields.io/badge/VS_Code-extension-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![Meta Quest](https://img.shields.io/badge/Meta_Quest-Store-0467DF?style=flat-square&logo=meta&logoColor=white)
-![License: MIT](https://img.shields.io/badge/license-MIT-yellow?style=flat-square)
+**VS Code extension for builds and release channels in the Meta Quest Store** — upload, promote
+and inspect builds across ALPHA / BETA / RC / STORE without leaving the editor.
 
-VSCode extension for managing builds and release channels in Meta Quest Store.
+![Status](https://img.shields.io/badge/status-active-2ea043)
+![Platform](https://img.shields.io/badge/platform-Linux%20%C2%B7%20macOS%20%C2%B7%20Windows-1f1f1f)
+![License](https://img.shields.io/badge/license-MIT-7ba7d4)
+
+![VS Code](https://img.shields.io/badge/VS%20Code-extension-007ACC?logo=visualstudiocode&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Meta Quest](https://img.shields.io/badge/Meta%20Quest-Store-0467DF?logo=meta&logoColor=white)
+
+</div>
+
+---
 
 ## Features
 
