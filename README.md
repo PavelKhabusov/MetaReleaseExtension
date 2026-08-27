@@ -1,5 +1,10 @@
 # Meta Quest Release Manager
 
+![VS Code](https://img.shields.io/badge/VS_Code-extension-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Meta Quest](https://img.shields.io/badge/Meta_Quest-Store-0467DF?style=flat-square&logo=meta&logoColor=white)
+![License: MIT](https://img.shields.io/badge/license-MIT-yellow?style=flat-square)
+
 VSCode extension for managing builds and release channels in Meta Quest Store.
 
 ## Features
